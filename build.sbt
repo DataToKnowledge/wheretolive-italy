@@ -41,6 +41,7 @@ lazy val dependencies = Seq(
   "org.jsoup" % "jsoup" % "1.10.2",
   "com.typesafe.scala-logging" %% "scala-logging" % "3.5.0",
   "com.rometools" % "rome" % "1.7.1",
+  "com.intenthq" % "gander_2.11" % "1.3.1",
   "com.trueaccord.scalapb" %% "scalapb-runtime" % com.trueaccord.scalapb.compiler.Version.scalapbVersion % "protobuf"
 )
 

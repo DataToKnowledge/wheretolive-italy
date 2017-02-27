@@ -4,6 +4,7 @@ package repository
 import java.net.URL
 import java.time.{LocalDate, LocalDateTime}
 
+import com.intenthq.gander.Gander
 import model.{Article, Feed}
 import org.jsoup.Jsoup
 import com.rometools.rome.io.{SyndFeedInput, XmlReader}
@@ -83,5 +84,25 @@ trait ExtractorRepositoryImpl extends ExtractorRepository {
     }
   }
 
-  override def mainContent(article: Article)(implicit ec: ExecutionContext) = ???
+  override def mainContent(article: Article)(implicit ec: ExecutionContext) = Future {
+    val response = Http(article.uri).asString
+
+    Gander.extract(response.body).map{ page =>
+
+        val description = if (page.metaDescription.nonEmpty) page.metaDescription
+        else article.description
+
+        val date = page.publishDate.map(_.getTime).getOrElse(article.date)
+
+        val keywords = page.metaKeywords.split("[,\\s]+").filter(_.length > 2)
+
+        article.update(
+          _.description := description,
+          _.keywords := article.keywords ++ keywords,
+          _.date := date,
+          _.lang := page.lang.getOrElse(""),
+          _.text := page.cleanedText.getOrElse("")
+        )
+    }.getOrElse(article)
+  }
 }
