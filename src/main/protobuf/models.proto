@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package domain.model;
+
+message Feed {
+    string url = 1;
+    string publisher = 2;
+    string lang = 3;
+    repeated string last_urls = 4;
+    int64 last_time = 5;
+    int64 count = 6;
+}
+
+message QueryTerm {
+    string query = 1;
+    string lang = 2;
+}
+
+message Article {
+    string uri = 1;
+    string title = 2;
+    string description = 3;
+    repeated string categories = 4;
+    repeated string keywords = 5;
+    string image_url = 6;
+    string publihser = 7;
+    int64 date = 8;
+    string lang = 9;
+    string text = 10;
+    Location location = 11;
+}
+
+message Annotation {
+    string surface_form = 1;
+    string dpedia_url = 2;
+    string wikipedia_url = 3;
+    repeated AnnotationType types = 4;
+    int32 offset = 5;
+    int32 support = 6;
+    Pin pin = 7;
+
+    enum Section {
+        NOT_SET = 0;
+        TITLE = 1;
+        SUMMARY = 2;
+        TEXT = 3;
+    }
+
+    message AnnotationType {
+        string src = 1;
+        string value = 2;
+    }
+}
+
+message Pin {
+   double lat = 1;
+   double lon = 2;
+}
+
+message Location {
+    int64 id = 1;
+    string city = 2;
+    string province = 3;
+    string region = 4;
+    Pin pin = 5;
+}
+
+message FlatArticle {
+    string uri = 1;
+    string title = 2;
+    string description = 3;
+    repeated string categories = 4;
+    repeated string keywords = 5;
+    string image_url = 6;
+    string publihser = 7;
+    int64 date = 8;
+    string lang = 9;
+    string text = 10;
+    string main_city = 11;
+    string main_province = 12;
+    string main_region = 13;
+    Pin main_pin = 14;
+    repeated string locations = 15;
+    repeated string persons = 16;
+    repeated string crimes = 17;
+    repeated string meta_tags = 18;
+    repeated Pin pins = 1000;
+}
