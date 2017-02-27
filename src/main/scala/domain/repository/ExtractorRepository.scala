@@ -1,7 +1,6 @@
 package domain
 package repository
 
-
 import model._
 
 import scala.concurrent.{ExecutionContext, Future}

@@ -23,7 +23,7 @@ message Article {
     repeated string categories = 4;
     repeated string keywords = 5;
     string image_url = 6;
-    string publihser = 7;
+    string publisher = 7;
     int64 date = 8;
     string lang = 9;
     string text = 10;
