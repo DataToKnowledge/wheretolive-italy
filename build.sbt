@@ -38,6 +38,8 @@ lazy val dependencies = Seq(
   "org.typelevel" %% "cats" % "0.9.0",
   "com.iheart" %% "ficus" % "1.4.0",
   "org.scalaj" %% "scalaj-http" % "2.3.0",
+  "org.jsoup" % "jsoup" % "1.10.2",
+  "com.typesafe.scala-logging" %% "scala-logging" % "3.5.0",
   "com.trueaccord.scalapb" %% "scalapb-runtime" % com.trueaccord.scalapb.compiler.Version.scalapbVersion % "protobuf"
 )
 
